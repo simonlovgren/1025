@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+body {
+  background-color: #ecedf0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.app {
+  text-align: center;
+  padding-top: 3rem;
+}
+
+
+
+header.title {
+  font-size: 4rem;
+  text-align: right;
+  color: #aaaaaa;
+  text-shadow: #ffffff 0px 1px;
+  font-weight: 100;
+  font-style: italic;
+}
+
+
+.game {
+  display: inline-block;
+}
+
+
+.board {
+  background-color: #ffffff;
+  padding: 2rem 1rem 1rem 1rem;
+  border-radius: 0.4rem;
+  display: inline-block;
+  box-shadow:  #0000005e 0rem 0.1rem 0.2rem;
+
+  text-shadow: #fff 0px 1px;
+  color: #444444;
+  font-weight: 300;
+
+  position: relative;
+
+}
+
+
+.board .row{
+  display: flex;
+}
+
+.board .row .col {
+  flex: 1;
+}
+
+
+.board .row.title .col {
+  text-align: center;
+  display: inline-block;
+}
+
+
+.board .row .col.title {
+  text-align: center;
+  padding: 0.5rem;
+  width: 3rem;
+  flex: none;
+}
+
+.col.title span {
+  display: inline-block;
+  line-height: 30px;
+}
+
+.col.title span.unit {
+  font-size: 0.8rem;
+}
+
+
+/* Score row*/
+.row.score .col {
+  text-align: right;
+  padding: 10px 10px 0 10px;
+  margin: 10px 0px 0px 0px;
+  border-top: 2px solid #ecedf0;
+}
+
+.row.score span {
+  display: block;
+  margin-left: 0.1rem;
+  float: left;
+}
+
+.row.score span.score {
+  font-size: 2rem;
+  text-align: right;
+  float: right;
+}
+
+
+.board .row.distance.completed:after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 3.3rem;
+  margin-top: 0.3rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url(media/crown.svg);
+  background-repeat: no-repeat;
+  transform: rotate(20deg);
+}
+
+
+.col.round {
+  flex: 1;
+  display: flex;
+  padding: 0px 5px;
+  border-right: 2px solid #ecedf0;
+}
+
+.col.round:last-child {
+  border-right: none;
+}
+
+.putt {
+  width: 30px;
+  height: 30px;
+  margin: 10px 5px ;
+  background-color: #ecedf0;
+  border-radius: 15%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.putt.bonus {
+  background-image: url(media/star.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 70%;
+  background-blend-mode: color-burn;
+}
+
+.putt.miss {
+  background-color: #ff3383;
+}
+
+.putt.hit {
+  background-color: #4cdbb7;
+}
+
+.board .row.distance.completed .putt {
+  background-color: #ffc934;
+}
+
+
+/* game controls*/
+.game .controls{
+  padding: 1rem 0 0 0;
+}
+
+
+/* Buttons at bottom of game */
+a.button, a.button:visited {
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+
+  background-color: #2783da;
+
+  display: inline-block;
+  line-height: 3rem;
+  padding: 0rem 2rem;
+
+  border-radius: 0.3rem;
+
+  transition: 0.1s;
+}
+
+a.button:hover {
+  background-color: #4c9de9;
+}
+
+
+a.button.green, a.button.green:visited {
+  background-color: #0c9;
+}
+
+a.button.green:hover {
+  background-color: #4cdbb7;
+}
+
+a.button.red, a.button.red:visited {
+  background-color: #ff3383;
+}
+
+a.button.red:hover {
+  background-color: #ff7fb1;
+}
+
+
+/* General float */
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
