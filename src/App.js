@@ -1,5 +1,135 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+
+const config = {
+    putts : 2,
+    rounds : 3,
+    distances : [
+        {
+            distance : 10,
+            bonuses : {
+                value: 5,
+                putts: [0, -1]
+            }
+        },
+        {
+            distance : 15,
+            bonuses : {
+                value: 5,
+                putts: [0, -1]
+            }
+        },
+        {
+            distance : 20,
+            bonuses : {
+                value: 5,
+                putts: [0, -1]
+            }
+        },
+        {
+            distance : 25,
+            bonuses : {
+                value: 5,
+                putts: [0, -1]
+            }
+        },
+        {
+            distance : 30,
+            bonuses : {
+                value: 10,
+                putts: [0, -1]
+            }
+        },
+        {
+            distance : 35,
+            bonuses : {
+                value: 10,
+                putts: [0, -1]
+            }
+        }
+    ]
+}
+
+
+/** Class */
+
+function DistanceRow(props){
+    let rounds = [];
+    let puttCount = 0;
+
+    let bonusPutts = [];
+    props.distance.bonuses.putts.map((index) => {
+        console.log(index);
+        bonusPutts.push((index>=0?index:(props.rounds*props.putts)+index));
+    });
+    console.log(bonusPutts);
+
+    for (let round = 0; round < props.rounds; ++round)
+    {
+        let putts = []
+        for (let putt = 0; putt < props.putts; ++putt)
+        {
+            let puttIndex = [props.index, puttCount];
+            let puttBonus = bonusPutts.includes(puttCount) ? props.distance.bonuses.value : 0;
+            putts.push(<div className={`putt ${puttBonus>0?"bonus":""}`} data-putt-index={puttIndex} data-putt-bonus={puttBonus}></div>)
+            ++puttCount;
+        }
+        rounds.push(
+            <div className="col round">
+                {putts}
+            </div>
+        )
+    }
+    return (
+        <div className="row distance">
+            <div className="col title">
+                <span>{props.distance.distance} <span className="unit">ft</span></span>
+            </div>
+            {rounds}
+        </div>
+    )
+}
+
+function GameBoard() {
+
+    let rounds = [];
+    for (let i = 0; i < config.rounds; ++i)
+    {
+        rounds.push(
+            <div className="col round">
+                <span>Rd. {i+1}</span>
+            </div>
+        );
+    }
+
+    return (
+        <div className="board">
+            <div className="row title">
+                <div className="col title">
+                </div>
+                {rounds}
+            </div>
+
+            {config.distances.map((distance, index) => (
+                <DistanceRow index={index} distance={distance} rounds={config.rounds} putts={config.putts} />
+            ))}
+
+            <div className="row score">
+                <div className="col">
+                    <span>SCORE:</span>
+                    <span className="score">290</span>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+
+
+/** Entrypoint */
+
+
 
 function App() {
     return (
@@ -8,139 +138,7 @@ function App() {
                 <header className="title">
                     1025
                 </header>
-
-                <div className="board">
-
-                    <div className="row title">
-                        <div className="col title">
-                        </div>
-                        <div className="col round">
-                            <span>Rd. 1</span>
-                        </div>
-                        <div className="col round">
-                            <span>Rd. 2</span>
-                        </div>
-                        <div className="col round">
-                            <span>Rd. 3</span>
-                        </div>
-                    </div>
-
-                    <div className="row distance">
-                        <div className="col title">
-                            <span>10 <span className="unit">ft</span></span>
-                        </div>
-                        <div className="col round">
-                            <div className="putt miss bonus"></div>
-                            <div className="putt hit"></div>
-                        </div>
-                        <div className="col round">
-                            <div className="putt empty"></div>
-                            <div className="putt empty"></div>
-                        </div>
-                        <div className="col round">
-                            <div className="putt empty"></div>
-                            <div className="putt empty bonus"></div>
-                        </div>
-                    </div>
-
-                    <div className="row distance">
-                        <div className="col title">
-                            <span>15 <span className="unit">ft</span></span>
-                        </div>
-                        <div className="col round">
-                            <div className="putt hit bonus"></div>
-                            <div className="putt hit"></div>
-                        </div>
-                        <div className="col round">
-                            <div className="putt miss"></div>
-                            <div className="putt empty"></div>
-                        </div>
-                        <div className="col round">
-                            <div className="putt empty"></div>
-                            <div className="putt empty bonus"></div>
-                        </div>
-                    </div>
-
-                    <div className="row distance completed">
-                        <div className="col title">
-                            <span>20 <span className="unit">ft</span></span>
-                        </div>
-                        <div className="col round">
-                            <div className="putt hit bonus"></div>
-                            <div className="putt hit"></div>
-                        </div>
-                        <div className="col round">
-                            <div className="putt hit"></div>
-                            <div className="putt hit"></div>
-                        </div>
-                        <div className="col round">
-                            <div className="putt hit"></div>
-                            <div className="putt hit bonus"></div>
-                        </div>
-                    </div>
-
-                    <div className="row distance">
-                        <div className="col title">
-                            <span>25 <span className="unit">ft</span></span>
-                        </div>
-                        <div className="col round">
-                            <div className="putt miss bonus"></div>
-                            <div className="putt hit"></div>
-                        </div>
-                        <div className="col round">
-                            <div className="putt empty"></div>
-                            <div className="putt empty"></div>
-                        </div>
-                        <div className="col round">
-                            <div className="putt empty"></div>
-                            <div className="putt empty bonus"></div>
-                        </div>
-                    </div>
-
-                    <div className="row distance">
-                        <div className="col title">
-                            <span>30 <span className="unit">ft</span></span>
-                        </div>
-                        <div className="col round">
-                            <div className="putt hit bonus"></div>
-                            <div className="putt hit"></div>
-                        </div>
-                        <div className="col round">
-                            <div className="putt miss"></div>
-                            <div className="putt empty"></div>
-                        </div>
-                        <div className="col round">
-                            <div className="putt empty"></div>
-                            <div className="putt empty bonus"></div>
-                        </div>
-                    </div>
-
-                    <div className="row distance">
-                        <div className="col title">
-                            <span>35 <span className="unit">ft</span></span>
-                        </div>
-                        <div className="col round">
-                            <div className="putt empty bonus"></div>
-                            <div className="putt empty"></div>
-                        </div>
-                        <div className="col round">
-                            <div className="putt empty"></div>
-                            <div className="putt empty"></div>
-                        </div>
-                        <div className="col round">
-                            <div className="putt empty"></div>
-                            <div className="putt empty bonus"></div>
-                        </div>
-                    </div>
-
-                    <div className="row score">
-                        <div className="col">
-                            <span>SCORE:</span>
-                            <span className="score">290</span>
-                        </div>
-                    </div>
-                </div>
-
+                <GameBoard/>
                 <div className="controls">
                     <a href="#" className="button red left">New Game</a>
                     <a href="#" className="button green right">Finish</a>
