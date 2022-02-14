@@ -132,14 +132,6 @@ header.title {
   cursor: pointer;
 }
 
-.putt.bonus {
-  background-image: url(media/star.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 70%;
-  background-blend-mode: color-burn;
-}
-
 .putt.miss {
   background-color: #ff3383;
 }
@@ -150,6 +142,18 @@ header.title {
 
 .board .row.distance.completed .putt {
   background-color: #ffc934;
+}
+
+.putt.bonus {
+  background-image: url(media/star.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 70%;
+  background-blend-mode: color-burn;
+}
+
+.putt.miss.bonus {
+  background-blend-mode: multiply;
 }
 
 
