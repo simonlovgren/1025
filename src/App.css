@@ -2,7 +2,7 @@
 
 
 body {
-  background-color: #ecedf0;
+  background-color: #ffffff;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -15,7 +15,7 @@ body {
 
 header.title {
   font-size: 4rem;
-  text-align: right;
+  text-align: center;
   color: #aaaaaa;
   text-shadow: #ffffff 0px 1px;
   font-weight: 100;
@@ -33,7 +33,6 @@ header.title {
   padding: 2rem 1rem 1rem 1rem;
   border-radius: 0.4rem;
   display: inline-block;
-  box-shadow:  #0000005e 0rem 0.1rem 0.1rem;
 
   text-shadow: #fff 0px 1px;
   color: #444444;
@@ -175,12 +174,11 @@ a.button, a.button:visited {
   display: inline-block;
   line-height: 3rem;
   padding: 0rem 2rem;
+  margin: 0 0.5em;
 
   border-radius: 0.3rem;
 
   transition: 0.1s;
-
-  box-shadow:  #0000005e 0rem 0.1rem 0rem;
 }
 
 a.button:hover {

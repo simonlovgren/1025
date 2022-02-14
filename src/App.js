@@ -140,8 +140,8 @@ function App() {
                 </header>
                 <GameBoard/>
                 <div className="controls">
-                    <a href="#" className="button red left">New Game</a>
-                    <a href="#" className="button green right">Finish</a>
+                    <a href="#" className="button red">New Game</a>
+                    <a href="#" className="button green">Finish</a>
                 </div>
             </div>
         </div>
