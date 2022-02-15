@@ -50,23 +50,57 @@ const config = {
     ]
 }
 
+const PUTTSTATE = {
+    tbd : 0,
+    hit : 1,
+    miss : 2
+};
+
 export class Game extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            boardState : [...Array(config.distances.length)].map(() => Array(config.putts*config.rounds).fill(PUTTSTATE.tbd)),
+            totalScore : 0
+        }
+        console.log(this.state.boardState);
+        console.log(this.state);
     }
 
+    clickPutt = (event) => {
+        const distanceIndex = event.target.dataset.puttindex.split(',')[0];
+        const puttIndex = event.target.dataset.puttindex.split(',')[1];
+        const puttState = this.state.boardState[distanceIndex][puttIndex];
 
-    DistanceRow(props){
+        console.log(distanceIndex);
+        console.log(puttIndex);
+        console.log(puttState);
+        switch(puttState)
+        {
+            case PUTTSTATE.hit:
+                this.state.boardState[distanceIndex][puttIndex] = PUTTSTATE.miss;
+                break;
+            case PUTTSTATE.miss:
+                this.state.boardState[distanceIndex][puttIndex] = PUTTSTATE.tbd;
+                break;
+            default:
+                this.state.boardState[distanceIndex][puttIndex] = PUTTSTATE.hit;
+                break;
+        }
+        console.log(this.state);
+        this.setState(this.state);
+    }
+
+    DistanceRow = (props) => {
+        const completeRow = this.state.boardState[props.index].every(e => e === PUTTSTATE.hit);
         let rounds = [];
         let puttCount = 0;
-
         let bonusPutts = [];
         props.distance.bonuses.putts.map((index) => {
-            console.log(index);
             bonusPutts.push((index>=0?index:(props.rounds*props.putts)+index));
         });
-        console.log(bonusPutts);
 
         for (let round = 0; round < props.rounds; ++round)
         {
@@ -75,7 +109,22 @@ export class Game extends React.Component {
             {
                 let puttIndex = [props.index, puttCount];
                 let puttBonus = bonusPutts.includes(puttCount) ? props.distance.bonuses.value : 0;
-                putts.push(<div className={`putt ${puttBonus>0?"bonus":""}`} data-putt-index={puttIndex} data-putt-bonus={puttBonus}></div>)
+                let puttClasses = ['putt']
+                if (puttBonus > 0)
+                {
+                    puttClasses.push('bonus');
+                }
+                let puttState = this.state.boardState[puttIndex[0]][puttIndex[1]];
+                switch(puttState){
+                    case PUTTSTATE.hit:
+                        puttClasses.push('hit');
+                        break;
+                    case PUTTSTATE.miss:
+                        puttClasses.push('miss');
+                    default:
+                        break;
+                }
+                putts.push(<div className={puttClasses.join(' ')} data-puttindex={puttIndex} data-puttbonus={puttBonus} onClick={this.clickPutt}></div>)
                 ++puttCount;
             }
             rounds.push(
@@ -85,7 +134,7 @@ export class Game extends React.Component {
             )
         }
         return (
-            <div className="row distance">
+            <div className={`row distance ${completeRow && 'completed'}`}>
                 <div className="col title">
                     <span>{props.distance.distance} <span className="unit">ft</span></span>
                 </div>
@@ -116,13 +165,13 @@ export class Game extends React.Component {
                     </div>
 
                     {config.distances.map((distance, index) => (
-                        <this.DistanceRow index={index} distance={distance} rounds={config.rounds} putts={config.putts} />
+                        <this.DistanceRow index={index} key={index} distance={distance} rounds={config.rounds} putts={config.putts} />
                     ))}
 
                     <div className="row score">
                         <div className="col">
                             <span>SCORE:</span>
-                            <span className="score">290</span>
+                            <span className="score">{this.state.totalScore}</span>
                         </div>
                     </div>
                 </div>
