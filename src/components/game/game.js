@@ -91,13 +91,45 @@ export class Game extends React.Component {
         }
         console.log(this.state);
         this.setState(this.state);
+        this.CalculatePoints()
     }
 
+    CalculatePoints = () => {
+        
+        let sum = 0;
+        this.state.boardState.forEach( (e, distanceIndex) => {
+            const distance = config.distances[distanceIndex]
+            const completeRow = this.state.boardState[distanceIndex].every(e => e === PUTTSTATE.hit);            
+            sum += completeRow? distance.distance : 0;            
+            
+            let bonusPutts = [];        
+            distance.bonuses.putts.map((index) => {
+                bonusPutts.push((index>=0?index:(config.rounds*config.putts)+index));
+            });
+            
+            e.forEach((p,index)=>{
+                if(p===PUTTSTATE.hit){
+                    sum += distance.distance;
+                    sum += bonusPutts.includes(index) ? distance.bonuses.value : 0;
+                }            
+                
+                
+            })
+            
+            
+        }  )
+
+        this.state.totalScore = sum;
+        this.setState(this.state);
+        //Kolla på alla i griden, calculera.
+        //Kalla på efter klick.
+    }
     DistanceRow = (props) => {
         const completeRow = this.state.boardState[props.index].every(e => e === PUTTSTATE.hit);
         let rounds = [];
         let puttCount = 0;
         let bonusPutts = [];
+        
         props.distance.bonuses.putts.map((index) => {
             bonusPutts.push((index>=0?index:(props.rounds*props.putts)+index));
         });
