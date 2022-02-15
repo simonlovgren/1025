@@ -65,18 +65,32 @@
     float: right;
   }
 
+  @keyframes crown-shake {
+    0%    {transform:rotate(20deg);}
+    12.5% {transform:rotate(10deg);}
+    25%   {transform:rotate(28deg);}
+    37.5% {transform:rotate(13deg);}
+    50%   {transform:rotate(25deg);}
+    62.5% {transform:rotate(15deg);}
+    75%   {transform:rotate(23deg);}
+    87.5% {transform:rotate(18deg);}
+    100%  {transform:rotate(20deg);}
+  }
 
   .board .row.distance.completed:after {
     content: "";
     display: block;
     position: absolute;
-    left: 3.3rem;
+    left: 3.2rem;
     margin-top: 0.3rem;
     width: 1.5rem;
     height: 1.5rem;
     background-image: url(media/crown.svg);
     background-repeat: no-repeat;
     transform: rotate(20deg);
+
+    animation-duration: 1s;
+    animation-name: crown-shake;
   }
 
 
