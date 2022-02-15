@@ -94,6 +94,14 @@ export class Game extends React.Component {
         this.CalculatePoints()
     }
 
+    ResetGame =() => {
+        
+        this.state = {
+            boardState : [...Array(config.distances.length)].map(() => Array(config.putts*config.rounds).fill(PUTTSTATE.tbd)),
+            totalScore : 0
+        }
+        this.setState(this.state);
+    }
     CalculatePoints = () => {
         
         let sum = 0;
@@ -111,13 +119,9 @@ export class Game extends React.Component {
                 if(p===PUTTSTATE.hit){
                     sum += distance.distance;
                     sum += bonusPutts.includes(index) ? distance.bonuses.value : 0;
-                }            
-                
-                
+                }
             })
-            
-            
-        }  )
+        })
 
         this.state.totalScore = sum;
         this.setState(this.state);
@@ -208,8 +212,8 @@ export class Game extends React.Component {
                     </div>
                 </div>
                 <div className="controls">
-                    <a href="#" className="button red">New Game</a>
-                    <a href="#" className="button green">Finish</a>
+                    <a href="#" className="button red" onClick={this.ResetGame}>New Game</a>
+                    {/* <a href="#" className="button green">Finish</a> */}
                 </div>
             </div>
         )
