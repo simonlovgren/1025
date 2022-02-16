@@ -58,25 +58,37 @@ const PUTTSTATE = {
 
 export class Game extends React.Component {
 
+    freshState( puttState = PUTTSTATE.tbd ){
+        return {
+            timestamp : (new Date()).toISOString(),
+            boardState : [...Array(config.distances.length)].map(() => Array(config.putts*config.rounds).fill(puttState)),
+            totalScore : 0
+        }
+    }
+
     constructor(props) {
         super(props);
 
-        this.state = {
-            boardState : [...Array(config.distances.length)].map(() => Array(config.putts*config.rounds).fill(PUTTSTATE.tbd)),
-            totalScore : 0
+        let savedState = JSON.parse(localStorage.getItem('gamestate'));
+
+        if (savedState){
+            this.state = savedState;
+        }else{
+            this.state = this.freshState();
         }
-        console.log(this.state.boardState);
-        console.log(this.state);
     }
+
+    updateGameState = (newState) => {
+        localStorage.setItem('gamestate', JSON.stringify(newState));
+        newState.timestamp = (new Date()).toISOString();
+        this.setState(newState);
+    };
 
     clickPutt = (event) => {
         const distanceIndex = event.target.dataset.puttindex.split(',')[0];
         const puttIndex = event.target.dataset.puttindex.split(',')[1];
         const puttState = this.state.boardState[distanceIndex][puttIndex];
 
-        console.log(distanceIndex);
-        console.log(puttIndex);
-        console.log(puttState);
         switch(puttState)
         {
             case PUTTSTATE.hit:
@@ -89,32 +101,32 @@ export class Game extends React.Component {
                 this.state.boardState[distanceIndex][puttIndex] = PUTTSTATE.hit;
                 break;
         }
-        console.log(this.state);
-        this.setState(this.state);
-        this.CalculatePoints()
+        this.state.totalScore = this.CalculatePoints(this.state);
+        this.updateGameState(this.state);
     }
 
-    ResetGame =() => {
-        
-        this.state = {
-            boardState : [...Array(config.distances.length)].map(() => Array(config.putts*config.rounds).fill(PUTTSTATE.tbd)),
-            totalScore : 0
-        }
-        this.setState(this.state);
+    ResetGame = () => {
+        this.updateGameState(this.freshState());
     }
-    CalculatePoints = () => {
-        
+
+    CheckAll = () => {
+        let newState = this.freshState(PUTTSTATE.hit);
+        newState.totalScore = this.CalculatePoints(newState);
+        this.updateGameState(newState);
+    }
+
+    CalculatePoints = (state) => {
         let sum = 0;
-        this.state.boardState.forEach( (e, distanceIndex) => {
+        state.boardState.forEach( (e, distanceIndex) => {
             const distance = config.distances[distanceIndex]
-            const completeRow = this.state.boardState[distanceIndex].every(e => e === PUTTSTATE.hit);            
-            sum += completeRow? distance.distance : 0;            
-            
-            let bonusPutts = [];        
+            const completeRow = state.boardState[distanceIndex].every(e => e === PUTTSTATE.hit);
+            sum += completeRow? distance.distance : 0;
+
+            let bonusPutts = [];
             distance.bonuses.putts.map((index) => {
                 bonusPutts.push((index>=0?index:(config.rounds*config.putts)+index));
             });
-            
+
             e.forEach((p,index)=>{
                 if(p===PUTTSTATE.hit){
                     sum += distance.distance;
@@ -123,17 +135,15 @@ export class Game extends React.Component {
             })
         })
 
-        this.state.totalScore = sum;
-        this.setState(this.state);
-        //Kolla på alla i griden, calculera.
-        //Kalla på efter klick.
+        return sum;
     }
+
     DistanceRow = (props) => {
         const completeRow = this.state.boardState[props.index].every(e => e === PUTTSTATE.hit);
         let rounds = [];
         let puttCount = 0;
         let bonusPutts = [];
-        
+
         props.distance.bonuses.putts.map((index) => {
             bonusPutts.push((index>=0?index:(props.rounds*props.putts)+index));
         });
@@ -212,6 +222,7 @@ export class Game extends React.Component {
                     </div>
                 </div>
                 <div className="controls">
+                    <a href="#" className="button green" onClick={this.CheckAll}>Check all</a>
                     <a href="#" className="button red" onClick={this.ResetGame}>New Game</a>
                     {/* <a href="#" className="button green">Finish</a> */}
                 </div>
