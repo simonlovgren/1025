@@ -1,0 +1,90 @@
+.app {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+header.title {
+  font-size: 4rem;
+  text-align: center;
+  color: #aaaaaa;
+  text-shadow: #ffffff 0px 1px;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.main {
+  display: inline-block;
+  padding: 3rem 0;
+}
+
+.linklist {
+  margin-top: 0.5em;
+}
+
+/* Links */
+
+a , a:visited{
+  color: #888888;
+  text-decoration: none;
+  font-size: 1rem;
+  line-height: 3rem;
+  transition: 0.1s;
+}
+
+a:hover {
+  color:#0c9;
+}
+
+/* Buttons at bottom of game */
+
+a.button, a.button:visited {
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+
+  background-color: #2783da;
+
+  display: inline-block;
+  line-height: 3rem;
+  padding: 0rem 2rem;
+  margin: 0 0.5em;
+
+  border-radius: 0.3rem;
+
+  transition: 0.1s;
+}
+
+a.button:hover {
+  background-color: #4c9de9;
+}
+
+
+a.button.green, a.button.green:visited {
+  background-color: #0c9;
+}
+
+a.button.green:hover {
+  background-color: #4cdbb7;
+}
+
+a.button.red, a.button.red:visited {
+  background-color: #ff3383;
+}
+
+a.button.red:hover {
+  background-color: #ff7fb1;
+}
+
+
+/* General float */
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}

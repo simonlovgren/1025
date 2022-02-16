@@ -1,0 +1,48 @@
+{
+    "putts" : 2,
+    "rounds" : 3,
+    "distances" : [
+        {
+            "distance" : 10,
+            "bonuses" : {
+                "value": 5,
+                "putts": [0, -1]
+            }
+        },
+        {
+            "distance" : 15,
+            "bonuses" : {
+                "value": 5,
+                "putts": [0, -1]
+            }
+        },
+        {
+            "distance" : 20,
+            "bonuses" : {
+                "value": 5,
+                "putts": [0, -1]
+            }
+        },
+        {
+            "distance" : 25,
+            "bonuses" : {
+                "value": 5,
+                "putts": [0, -1]
+            }
+        },
+        {
+            "distance" : 30,
+            "bonuses" : {
+                "value": 10,
+                "putts": [0, -1]
+            }
+        },
+        {
+            "distance" : 35,
+            "bonuses" : {
+                "value": 10,
+                "putts": [0, -1]
+            }
+        }
+    ]
+}
