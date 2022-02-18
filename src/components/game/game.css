@@ -138,6 +138,38 @@
   background-blend-mode: multiply;
 }
 
+/* Color blind enhanced mode*/
+.cb-mode .putt.miss {
+  background-color: #ff3383;
+  background-image: url(../../media/miss.svg);
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.cb-mode .putt.hit {
+  background-color: #4cdbb7;
+  background-image: url(../../media/hit.svg);
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.board.cb-mode .row.distance.completed .putt {
+  background-color: #ffc934;
+  background-image: url(../../media/crown_putt.svg);
+}
+
+.cb-mode .putt.miss.bonus {
+  background-blend-mode: multiply;
+  background-image: url(../../media/star.svg);
+}
+
+.cb-mode .putt.hit.bonus {
+  background-image: url(../../media/star_hit.svg);
+  background-blend-mode: normal;
+}
+
 
 /* game controls*/
 .game .controls{
