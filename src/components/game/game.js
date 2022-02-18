@@ -26,10 +26,13 @@ export class Game extends React.Component {
         // Get / Set up state
         let savedState = JSON.parse(localStorage.getItem('gamestate'));
         if (savedState){
-            this.state = savedState;
-        }else{
-            this.state = freshState(this.config);
+            // Need to check that the board size (i.e. config) has not changed in a
+            // breaking way.
+            if ((savedState.boardState.length == this.config.distances.length) && (savedState.boardState[0].length == (this.config.putts*this.config.rounds))){
+                this.state = savedState;
+            }
         }
+        this.state = this.state || freshState(this.config);
     }
 
     updateGameState = (newState) => {
