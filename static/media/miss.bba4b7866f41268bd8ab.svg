@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #DC2A79;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <g id="Artboard_1" data-name="Artboard 1">
+    <path id="Shape_2_copy" data-name="Shape 2 copy" class="cls-1" d="M45.945,64.043L-0.086,110.074l18.012,18.012L63.957,82.055l46.031,46.031L128,110.074,81.969,64.043,128,18.012,109.988,0,63.957,46.031,17.926,0-0.086,18.012Z" />
+  </g>
+</svg>
