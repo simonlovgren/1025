@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 header.title {
@@ -16,7 +16,6 @@ header.title {
 }
 
 .main {
-  display: inline-block;
   padding: 3rem 0;
 }
 
@@ -24,9 +23,40 @@ header.title {
   margin-top: 0.5em;
 }
 
+/* cb-mode switch */
+div#cb-mode {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  background: #ff3383;
+  padding: 0.2em;
+  width: 2em;
+  height: 2em;
+  border-radius: 2em;
+  background-image: url(../media/triangle.svg);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+div#cb-mode:hover {
+  background-color: #ff7fb1;
+}
+
+div#cb-mode.active {
+  background-color: #0c9;
+}
+
+div#cb-mode.active:hover {
+  background-color: #4cdbb7;
+}
+
+
 /* Links */
 
-a , a:visited{
+a, a:visited{
   color: #888888;
   text-decoration: none;
   font-size: 1rem;

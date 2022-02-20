@@ -20,7 +20,6 @@
   flex: 1;
 }
 
-
 .board .row.title .col {
   text-align: center;
   display: inline-block;
@@ -130,7 +129,7 @@
   background-image: url(../../media/star.svg);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 70%;
+  background-size: 60%;
   background-blend-mode: color-burn;
 }
 
@@ -155,7 +154,7 @@
   background-position: center;
 }
 
-.board.cb-mode .row.distance.completed .putt {
+.cb-mode .board .row.distance.completed .putt {
   background-color: #ffc934;
   background-image: url(../../media/crown_putt.svg);
 }
